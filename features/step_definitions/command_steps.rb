@@ -11,3 +11,7 @@ end
 When(/^I subtract$/) do
   NoEquals::Subtract.execute(&log_error)
 end
+
+When(/^I multiply$/) do
+  NoEquals::Multiply.execute(&log_error)
+end

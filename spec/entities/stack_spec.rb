@@ -71,6 +71,10 @@ module NoEquals
           stack.subtract
           expect(result).to eq(-10)
         end
+        it 'is their product, after multiplying' do
+          stack.multiply
+          expect(result).to eq(31.25)
+        end
       end
     end
 
@@ -80,6 +84,10 @@ module NoEquals
 
     describe '#subtract' do
       it_behaves_like 'an arithmetic operation', :subtract
+    end
+
+    describe '#multiply' do
+      it_behaves_like 'an arithmetic operation', :multiply
     end
   end
 end

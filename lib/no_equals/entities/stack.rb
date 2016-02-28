@@ -7,6 +7,10 @@ class NoEquals::Stack
     apply(:+, &failure_policy)
   end
 
+  def multiply(&failure_policy)
+    apply(:*, &failure_policy)
+  end
+
   def push(value)
     value.tap { |x| array << x }
   end
