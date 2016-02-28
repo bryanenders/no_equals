@@ -75,6 +75,10 @@ module NoEquals
           stack.multiply
           expect(result).to eq(31.25)
         end
+        it 'is their quotient, after dividing' do
+          stack.divide
+          expect(result).to eq(0.2)
+        end
       end
     end
 
@@ -88,6 +92,23 @@ module NoEquals
 
     describe '#multiply' do
       it_behaves_like 'an arithmetic operation', :multiply
+    end
+
+    describe '#divide' do
+      it_behaves_like 'an arithmetic operation', :divide
+      context 'when the divisor is zero' do
+        before do
+          stack.push(1.3)
+          stack.push(0)
+        end
+        it "raises 'UndefinedBehavior' error" do
+          expect { stack.divide }.to raise_error(error)
+        end
+        it 'calls the failure policy' do
+          expect(mock_handler).to receive(:handle).with(error)
+          stack.divide { |x| mock_handler.handle(x) }
+        end
+      end
     end
   end
 end

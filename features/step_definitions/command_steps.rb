@@ -15,3 +15,7 @@ end
 When(/^I multiply$/) do
   NoEquals::Multiply.execute(&log_error)
 end
+
+When(/^I divide$/) do
+  NoEquals::Divide.execute(&log_error)
+end

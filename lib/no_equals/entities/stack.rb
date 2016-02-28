@@ -7,6 +7,14 @@ class NoEquals::Stack
     apply(:+, &failure_policy)
   end
 
+  def divide(&failure_policy)
+    a, b = pop
+    raise if b == 0
+    push(a/b)
+  rescue
+    fail!(&failure_policy)
+  end
+
   def multiply(&failure_policy)
     apply(:*, &failure_policy)
   end
