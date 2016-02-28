@@ -4,10 +4,7 @@ class NoEquals::Stack
   end
 
   def add(&failure_policy)
-    sum = pop.reduce(:+)
-    push(sum)
-  rescue
-    fail!(&failure_policy)
+    apply(:+, &failure_policy)
   end
 
   def push(value)
@@ -18,9 +15,20 @@ class NoEquals::Stack
     array.last
   end
 
+  def subtract(&failure_policy)
+    apply(:-, &failure_policy)
+  end
+
 private
 
   attr_reader :array
+
+  def apply(operator, &failure_policy)
+    value = pop.reduce(operator)
+    push(value)
+  rescue
+    fail!(&failure_policy)
+  end
 
   def fail!
     initialize
